@@ -1,0 +1,44 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm test
+
+  # Node 14 and 16 run V8 8.4 and 9.4 (Chromium 84 and 94): no offset styles. Polyfill
+  # them and compare with current Node's native output.
+  real-runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node test/real-runtime/emit.mjs > native.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 16
+      - run: node test/real-runtime/emit.mjs > node16.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 14
+      - run: node test/real-runtime/emit.mjs > node14.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node test/real-runtime/compare.mjs native.json node16.json
+      - run: node test/real-runtime/compare.mjs native.json node14.json
