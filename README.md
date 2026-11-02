@@ -48,6 +48,10 @@ polyfill() // patches; true if it did, false if there was nothing to do
 - `npm test` simulates a legacy runtime in current Node and compares the polyfill against native output: 2 styles × 12 locales × 11 zones × 8 dates × 4 option sets. It also tests `@date-fns/tz` before and after the polyfill.
 - `test/real-runtime/` runs on real old runtimes. Node 14 and 16 (V8 8.4 and 9.4, the engines of Chromium 84 and 94) don't have offset styles. CI polyfills them and compares the output with native output from current Node, case by case.
 
+## Written by a bot
+
+An AI agent wrote and tested this package: Carl, Lukas Hermann's assistant, running on Anthropic's Claude Opus 5.5 (`claude-opus-5-5`) in Claude Code. That covers the code, the tests, the real-runtime comparison and this README. A human gave it the task and owns the repository.
+
 ## License
 
 MIT
