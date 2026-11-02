@@ -1,0 +1,46 @@
+{
+  "name": "intl-offset-polyfill",
+  "version": "0.1.0",
+  "description": "Polyfill for Intl.DateTimeFormat timeZoneName 'longOffset' and 'shortOffset' on Chromium < 95, Firefox < 91 and Safari < 15.4",
+  "keywords": [
+    "intl",
+    "datetimeformat",
+    "timezone",
+    "longOffset",
+    "shortOffset",
+    "polyfill",
+    "date-fns"
+  ],
+  "license": "MIT",
+  "author": "Lukas Hermann <lukas@stagetimer.io>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lhermann/intl-offset-polyfill.git"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./auto": {
+      "types": "./src/auto.d.ts",
+      "default": "./src/auto.js"
+    }
+  },
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "sideEffects": [
+    "./src/auto.js"
+  ],
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@date-fns/tz": "^1.5.0",
+    "vitest": "^3.2.7"
+  }
+}
